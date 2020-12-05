@@ -47,30 +47,34 @@ pub fn input_generator(input: &str) -> Vec<Passport> {
 
 #[aoc(day4, part1)]
 pub fn solve_part1(input: &[Passport]) -> usize {
-    input.into_iter().filter(|p| {
-        p.byr != 0 && 
-        p.iyr != 0 &&
-        p.eyr != 0 &&
-        p.hgt != "" &&
-        p.hcl != "" &&
-        p.ecl != "" &&
-        p.pid != ""
-    } ).count()
+    input
+        .into_iter()
+        .filter(|p| {
+            p.byr != 0 && 
+            p.iyr != 0 &&
+            p.eyr != 0 &&
+            p.hgt != "" &&
+            p.hcl != "" &&
+            p.ecl != "" &&
+            p.pid != ""
+        } ).count()
 }
 
 #[aoc(day4, part2)]
 pub fn solve_part2(input: &[Passport]) -> usize {
-    input.into_iter().filter(|p| {
-        let re_hcl = Regex::new(r"^#[0-9a-f]{6}").unwrap();
-
-        byr_check(p.byr) && 
-        iyr_check(p.iyr) &&
-        eyr_check( p.eyr ) &&
-        hgt_check(p.hgt.as_str()) &&
-        re_hcl.is_match(&p.hcl) &&
-        ecl_check( &p.ecl.as_str()) &&
-        is_string_number(&p.pid) && p.pid.len() == 9
-    } ).count()
+    input
+        .into_iter()
+        .filter(|p| {
+            let re_hcl = Regex::new(r"^#[0-9a-f]{6}").unwrap();
+    
+            byr_check(p.byr) && 
+            iyr_check(p.iyr) &&
+            eyr_check( p.eyr ) &&
+            hgt_check(p.hgt.as_str()) &&
+            re_hcl.is_match(&p.hcl) &&
+            ecl_check( &p.ecl.as_str()) &&
+            is_string_number(&p.pid) && p.pid.len() == 9
+        }).count()
 }
 
 fn is_string_number(input: &String) -> bool {
