@@ -51,14 +51,12 @@ fn seat_ids(input: &[SeatPos]) -> Vec<i32> {
         .into_iter()
         .map(|s| {
             let mut upper = 127;
-            let mut lower = 0;
             let mut step = 64;
 
             // Get row
             for i in 0..7 {
                 match s.row[i] {
                     'F' => upper -= step,
-                    'B' => lower += step,
                     _ => {},
                 }
                 step /= 2;
@@ -67,14 +65,12 @@ fn seat_ids(input: &[SeatPos]) -> Vec<i32> {
 
             // Reset the ranges
             upper = 7;
-            lower = 0;
             step = 4;
 
             // Get column
             for i in 0..3 {
                 match s.col[i] {
                     'L' => upper -= step,
-                    'R' => lower += step,
                     _ => {},
                 }
                 step /= 2;
