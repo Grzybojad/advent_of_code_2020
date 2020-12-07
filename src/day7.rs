@@ -72,3 +72,27 @@ pub fn solve_part1(input: &[Rule]) -> usize {
 
     found_bags
 }
+
+#[aoc(day7, part2)]
+pub fn solve_part2(input: &[Rule]) -> usize {
+    nr_of_bags(input, "shiny gold".to_string())-1
+}
+
+fn nr_of_bags(input: &[Rule], color: String) -> usize {
+    let mut sum = 0;
+    
+    input
+        .into_iter()
+        .for_each(|r| {
+            if r.bag == color {
+                let contents = r.contents.borrow();
+                
+                sum = contents
+                    .into_iter()
+                    .map(|(b, &i)| (i as usize) * nr_of_bags(input, b.to_string()))
+                    .sum();
+            }
+        });
+    
+    sum+1
+}
