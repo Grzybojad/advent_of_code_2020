@@ -36,7 +36,7 @@ pub fn input_generator(input: &str) -> Vec<Instruction> {
 #[aoc(day8, part1)]
 pub fn solve_part1(input: &[Instruction]) -> i32 {
     let mut visited: Vec<bool> = Vec::new();
-    for i in 0..input.len() {
+    for _i in 0..input.len() {
         visited.push(false);
     }
     
