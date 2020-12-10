@@ -42,7 +42,7 @@ pub fn solve_part2(input: &[i32]) -> usize {
         match jolt - prev_jolt {
             3 => {
                 if single_jolt_count > 1 {
-                    paths *= arrangements(single_jolt_count-1);
+                    paths *= arrange(single_jolt_count-1);
                 }
                 single_jolt_count = 0;
             },
@@ -55,19 +55,17 @@ pub fn solve_part2(input: &[i32]) -> usize {
     
     // Add the device itself
     if single_jolt_count > 1 {
-        paths *= arrangements(single_jolt_count-1);
+        paths *= arrange(single_jolt_count-1);
     }
 
     paths
 }
 
-fn arrangements(segment_len: i32) -> usize {
+fn arrange(segment_len: usize) -> usize {
     match segment_len {
+        0 => 1,
         1 => 2,
         2 => 4,
-        3 => 7,
-        4 => 14,
-        5 => 24,
-        _ => panic!(),
+        n => arrange(n-1) + arrange(n-2) + arrange(n-3),
     }
 }
